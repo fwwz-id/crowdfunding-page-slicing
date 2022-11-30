@@ -1,34 +1,54 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import { Navbar } from "./components/Navbar";
+import { Banner } from "./components/Banner";
+import { Header } from "./components/Header";
+import { DoubleText } from "./components/DoubleText";
+import { ProgressBar } from "./components/ProgressBar";
+import { About } from "./components/About";
+
+const doubleTexts = [
+	{
+		first: "$89,914",
+		second: "of $100,000 backed",
+		withLine: true,
+	},
+	{
+		first: "5,007",
+		second: "total backers",
+		withLine: true,
+	},
+	{
+		first: "56",
+		second: "days left",
+		withLine: false,
+	},
+];
 
 function App() {
-  const [count, setCount] = useState(0)
+	return (
+		<>
+			<Navbar />
+			<Banner />
 
-  return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
+			<main className="container relative -top-20 space-y-8">
+				<Header />
+
+				<div className="bg-white flex flex-col md:flex-row md:flex-wrap items-center border border-slate-100 rounded-lg text-center md:text-left py-12 space-y-6 md:space-y-0">
+					{doubleTexts.map((doubleText, index) => (
+						<DoubleText
+							key={index}
+							text1={doubleText.first}
+							text2={doubleText.second}
+							withLine={doubleText.withLine}
+						/>
+					))}
+
+					<ProgressBar />
+				</div>
+
+				<About />
+			</main>
+		</>
+	);
 }
 
-export default App
+export default App;
